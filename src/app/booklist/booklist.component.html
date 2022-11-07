@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="row mr-auto">
+        <h2 class="col-6">Hi {{userFirstName}}</h2>
+        <div class="container col-2">
+            <a [routerLink]="['/allbooks']"
+               class="btn btn-info">All Books</a>
+        </div>
+        <div class="container col-2">
+        <a [routerLink]="['/users']" class="btn btn-info">All Users</a>
+
+    </div>
+    <div class="container col-2">
+        <a (click)="Logout()" class="btn btn-danger">
+			Logout
+		</a>
+    </div>
+    </div>
+
+    <div class="container">
+        <!-- <a [routerLink]="['genre', genreAll]" class="btn btn-info m-2">All Books</a> -->
+        <!-- <button [routerLink]="['genre', genreSelfhelp]" class="btn btn-info m-2">Self-help</button>
+        <button [routerLink]="['genre', genreBiography]" class="btn btn-info m-2">Biography</button>
+        <button [routerLink]="['genre', genreMystery]" class="btn btn-info m-2">Mystery</button> -->
+        <button [routerLink]="['addBook']"  class="btn btn-warning m-3">Add a Book</button>
+    </div>
+
+    <app-genre></app-genre>
+    <div class="row">
+        <div *ngFor="let book of bookList" class="col-lg-3  col-md-4 col-sm-12">
+            <div class="card shadow border-0 mb-4 align-items-stretch" >
+                <div class="card-header position-relative overflow-hidden bg-transparent border p-0">
+                    <img class="card-img-top" src="{{book.bookImageUrl}}" alt="{{book.bookName}}"
+                     height="450px" width="950px">
+                     
+                </div>
+                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3 border">
+                    <h6 class="text-truncate mb-3">{{book.bookName}}</h6>
+                    <div class="d-flex justify-content-center">
+                        <h6>{{book.bookAuthor}}</h6>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between bg-light border">
+                    <a [routerLink]="['detail',book.bookId]" class="btn btn-outline-success text-dark p-1">
+                        <fa-icon [icon]="faEyeIcon" class="ml-1"></fa-icon>View Detail
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+</div>

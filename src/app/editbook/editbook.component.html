@@ -1,0 +1,51 @@
+<div class="row container d-flex justify-content-center align-items-center">
+    <div class="col-lg-6 col-md-6 col-sm-12 p-2 mt-2 border shadow rounded">
+        <h3 class="p-2">Edit book</h3>
+        <form #myform="ngForm" (ngSubmit)="onSubmit(myform)" class="m-2">
+            <div class="form-group mt-2">
+                <label for="bookName">Book Title</label>
+                <input type="text" name="bookName" class="form-control" placeholder="Book name" required
+                #bookField="ngModel" [(ngModel)]="book.bookName" minlength="3">
+                <div class="text-danger" *ngIf="bookField.errors && (bookField.dirty || bookField.touched)">
+                    <span *ngIf="bookField.value.length == 0" [hidden]="!bookField.errors.required">Book name is required.</span>
+                    <span *ngIf="bookField.value.length > 0" [hidden]="bookField.errors.length > 3">Book title should have atleast 3 characters</span>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <label for="bookAuthor">Book Author</label>
+                <input type="text" name="bookAuthor" class="form-control" placeholder="Book Author" required
+                #bookAuthorField="ngModel" [(ngModel)]="book.bookAuthor">
+                <div class="text-danger" *ngIf="bookAuthorField.errors && (bookAuthorField.dirty || bookAuthorField.touched)">
+                    <span [hidden]="!bookAuthorField.errors.required">Book Author Name is required.</span>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <label for="bookImageUrl">Book Image URL</label>
+                <input type="text" name="bookImageUrl" class="form-control" placeholder="https://...." required
+                #bookImageUrlField="ngModel" [(ngModel)]="book.bookImageUrl" />
+                <div class="text-danger" *ngIf="bookImageUrlField.errors && (bookImageUrlField.dirty || bookImageUrlField.touched)">
+                    <span [hidden]="!bookImageUrlField.errors.required">Book name is required.</span>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <label for="Genre">Choose a genre:</label><br />
+                <select class="mt-2 p-1" name="Genre" id="genreCategories" [(ngModel)]="book.genre">
+                    <option value="" disabled >----Select genre----</option>
+                    
+                    <option *ngFor="let g of genres" value="{{g.id}}">{{g.genre}}</option>
+                </select>
+            </div>
+            <div class="form-group mt-2">
+                <label for="description">Description</label>
+                <input type="text" name="description" class="form-control" placeholder="" required
+                [(ngModel)]="book.description" />
+            </div>
+            <button type="submit" class="btn btn-primary pt-1 mt-3" [disabled]="!myform.form.valid">
+                Edit Book
+            </button>
+            
+        </form>
+
+        
+    </div>
+</div>

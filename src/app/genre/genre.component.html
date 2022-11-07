@@ -1,0 +1,21 @@
+<div class="row">
+<div *ngFor="let book of bookList" class="col-lg-3  col-md-4 col-sm-12">
+    <div class="card shadow border-0 mb-4 align-items-stretch" >
+        <div class="card-header position-relative overflow-hidden bg-transparent border p-0">
+            <img class="card-img-top" src="../../assets/images/{{book.bookImageUrl}}" alt="{{book.bookName}}"
+             height="450px" width="950px">
+             
+        </div>
+        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3 border">
+            <h6 class="text-truncate mb-3">{{book.bookName}}</h6>
+            <div class="d-flex justify-content-center">
+                <h6>{{book.bookAuthor}}</h6>
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between bg-light border">
+            <a [routerLink]="['/books/detail',book.bookId]" class="btn btn-outline-success text-dark p-1">
+                <i class="fas fa-eye text-primary mr-1"></i>View Detail
+            </a>
+        </div>
+    </div>
+</div>

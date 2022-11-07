@@ -1,0 +1,62 @@
+
+<div class="row">
+	<div class="col-8">
+		<h1>All Books</h1>
+	</div>
+	<div class="col-2">
+		<a [routerLink]="['/users']"
+		   class="btn btn-info">All Users</a>
+	</div>
+    <div class="col-2">
+		<a [routerLink]="['/allbooks']"
+		   class="btn btn-info">All Books</a>
+	</div>
+</div>
+<p>
+	<a [routerLink]="['/books/addBook']">Add Book</a>
+</p>
+<table class="table table-hover">
+    <thead>
+		<tr>
+			<th>
+				Book Title
+			</th>
+			<th>
+				Book Author
+			</th>
+			<th>
+				Genre
+			</th>
+			<th>
+				Description
+			</th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+    <tbody>
+        <tr *ngFor="let book of bookList">
+            <td>{{book.bookName}}</td>
+            <td>{{book.bookAuthor}}</td>
+            <td>{{book.genre}}</td>
+            <td style="width: 1px; max-width:1px; text-overflow: ellipsis; white-space: nowrap;
+            overflow: hidden">{{book.description}}</td>
+            <td><a [routerLink]="['edit',book.bookId]"
+                class="btn btn-warning">
+                <fa-icon [icon]="faEditIcon"></fa-icon>
+                     Edit
+                 </a></td>
+            <td><a [routerLink]="['/books/detail', book.bookId]"
+                class="btn btn-info">
+                <fa-icon [icon]="faEyeIcon"></fa-icon>
+                     Details
+                 </a></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<div>
+    <a [routerLink]="['/books']">Back to List</a>
+</div>

@@ -1,0 +1,102 @@
+<div class="row px-xl-5 bg-light container" >
+        <h2 class="col-10 mt-2">Hi {{userFirstName}}</h2>
+		<div class="col-2 container">
+			<button (click)="Logout()" class="logout btn btn-outline-danger mt-2">
+				Logout
+			</button>
+		</div>		
+
+	<div class="col-lg-5 pt-5">
+		<img class="img-fluid" src="{{book.bookImageUrl}}" alt="Image">
+	</div>
+
+	<div class="col-lg-7 pt-5">
+		<div class="row">
+			<div class="col-9">
+				<h1 class="font-weight-semi-bold book-title">{{book.bookName}}</h1>
+			</div>
+			<div class="col-3">
+				<button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" (click)="openModal()">
+					<i class="fa fa-trash"></i> Delete
+				</button>
+			</div>
+		</div>
+		<h3 class="p-2"> by <span class="author-title">{{book.bookAuthor}}</span></h3>
+		<h4>Genre: {{book.genre}}</h4>
+
+		<div class="d-flex align-items-center mb-4 pt-2">
+			<!-- <button class="btn btn-primary px-3">
+				<i class="fas fas-thumbs-up">
+				</i>Likes {{book.likes}}
+			</button> -->
+			<button class="" style="border: none;outline: none;">
+				<fa-icon [icon]="farThumbsUpIcon" size="2x"></fa-icon>
+				<span class="like m-2">{{book.likes}}</span>
+			</button>
+			<button class="m-1" style="border: none;outline: none;">
+				<fa-icon [icon]="farThumbsDownIcon" size="2x"></fa-icon>
+				<span class="like m-2">{{book.dislikes}}</span>
+			</button>
+		</div>
+
+		<div class="book-desc">
+			<h2>Book Description</h2>
+			<p>{{book.description}}</p>
+		</div>
+	</div>
+	<div class="row d-flex mt-4">
+		<!-- <form>
+			<div class="font-weight-bold"><b>Add Comment on book - </b></div>
+			<textarea rows="4" cols="50">Enter text here...</textarea>
+		</form> -->
+
+			<div class="col-12 justify-content-center">
+			  <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+				<div class="card-body p-4">
+				  <form class="form-outline mb-4" #commentForm="ngForm" (ngSubmit)="onCommentFormSubmit(commentForm)">
+					<label class="form-label" for="addANote">+ Add a comment</label>
+					<input type="text" id="addANote" class="form-control" placeholder="Type your comment..." 
+					required  #newComment  />
+					<button class="btn btn-outline-dark mt-1" type="submit">Add</button>
+				  </form>
+		  
+				  <div *ngFor="let comment of commentUserList" class="card mb-4">
+					<div class="card-body">
+					  <p>{{comment.comment}}</p>
+		  
+					  <div class="d-flex justify-content-between">
+						<div class="d-flex flex-row align-items-center">
+						  <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" alt="avatar" width="25"
+							height="25" />
+						  <p class="small mb-0 ms-2">{{comment.firstName}}</p>
+						</div>
+					  </div>
+					</div>
+				  </div>				  
+				</div>
+			  </div>
+			</div>
+
+	</div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+	<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+				<div class="modal-header">
+					  <h4 class="modal-title">Delete Cofirmation</h4>
+					  <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+					</div>
+		   <div class="modal-body">
+					  <p>Are you sure you want to delete this book?</p>
+					</div>
+				<div class="modal-footer">
+					  <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+					  <button type="button" class="btn btn-primary" (click)="deleteBook()">Delete</button>
+					</div>
+	   </div>
+		</div>
+</div>
+<div>
+    <a [routerLink]="['/books']">Back to List</a>
+</div>

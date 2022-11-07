@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+.toast-success {
+    text-align: center;
+    background-color: lightcyan;
+    position: fixed;
+    top: 0;
+    right: 5px;
+    z-index:99;
+    width: 20%;
+    height: 10%;
+    margin-top:3%;
+    padding-top: 15px;
+    border-radius: 15px !important;
+    box-shadow: 0 0 12px #999;
+    font-size: x-large;
+  }

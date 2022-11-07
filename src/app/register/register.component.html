@@ -1,0 +1,81 @@
+<div class="row container d-flex justify-content-center align-items-center">
+    <div class="col-lg-6 col-md-6 col-sm-12 p-2 mt-2 border shadow rounded">
+        <h3 class="p-2">Register with us...</h3>
+    <form #form="ngForm" (ngSubmit)="onFormSubmit(form)" class="m-2">
+        <div class="form-group  mt-2">
+            <label for="Name">Name</label>
+            <input type="text" class="form-control" name="firstName" placeholder="Enter name" required 
+            minlength="3" #nameField="ngModel" [(ngModel)]="user.firstName">
+            <div class="text-danger" *ngIf="nameField.errors && (nameField.dirty || nameField.touched)">
+                <p [hidden]="!nameField.errors.required">Name is required</p>
+                <p [hidden]="!nameField.errors.minlength">Minimum length must be atleast 3 characters long</p>
+            </div>
+        </div>
+        <div class="form-group mt-2">
+            <label for="Email">Email</label>
+            <input type="email" class="form-control" name="userName" placeholder="Enter email" required email
+            [pattern]="emailPattern" #emailField="ngModel" [(ngModel)]="user.userName">
+            <div class="text-danger" *ngIf="emailField.errors && (emailField.dirty || emailField.touched)">
+                <span [hidden]="!emailField.errors.required">Email is required.</span>
+                <span [hidden]="!emailField.errors.pattern">Email not in valid format</span>
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            <label for="Gender">Gender</label><br>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label">Male</label>
+                <input class="form-check-input" name="Gender" type="radio" value="0" (change)="onChangeRadio($event)" />
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">Female</label>
+                <input class="form-check-input" name="Gender" type="radio" value="1" (change)="onChangeRadio($event)" />
+              </div>
+        </div>
+
+        <div class="form-group mt-2">
+                <label for="DOB">Date of Birth</label>
+                <input type='date' class="form-control date" name="DOB" id="Date" required 
+                (change)="onChangeDate($event)" [(ngModel)]="user.dateOfBirth" 
+                #dateField="ngModel"/>
+                <div class="text-danger" *ngIf="dateField.errors && (dateField.dirty || dateField.touched)">
+                    <span [hidden]="!dateField.errors.required">Date of Birth is required.</span>
+                </div>
+         </div>
+
+         <div class="form-group mt-2">
+            <label for="hobby">Hobbies</label>
+            <div *ngFor="let hobby of hobbies" >
+                <input id="hobby" type="checkbox" value="hobby.hobby" (change)="onChangeCheckbox(hobby.hobby , $any($event))"  />
+                {{hobby.hobby}}
+            </div>
+        </div>
+        <div class="form-group mt-2">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Enter Password" required
+            [pattern]="pwdPattern" #passwordField="ngModel" [(ngModel)]="user.password">
+            <div class="text-danger" *ngIf="passwordField.errors && (passwordField.dirty || passwordField.touched)">
+                <span [hidden]="!passwordField.errors.required">Password is required.</span>
+                <span [hidden]="!passwordField.errors.pattern">Password not valid (Password should atleast have 1 uppercase letter, 1 lowercase letter, one special character and one number, length - 6-12 characters)</span>
+            </div>
+        </div>
+        <div class="form-group mt-2">
+            <label for="confirmpassword">Confirm Password</label>
+            <input type="password" class="form-control" name="confirmPassword" placeholder="Enter Password Again"
+            required #confirmPasswordField="ngModel" [(ngModel)]="user.confirmPassword">
+            <div class="text-danger" *ngIf=" (confirmPasswordField.dirty || confirmPasswordField.touched)">
+                <span [hidden]="!confirmPasswordField.errors?.['required']">This field is required.</span>
+                <span *ngIf="confirmPasswordField.value.length > 0" [hidden]="passwordField.value.length == confirmPasswordField.value.length">Lengths not same.</span>
+                <span *ngIf="confirmPasswordField.value.length > 0" [hidden]="passwordField.value == confirmPasswordField.value">Passwords should match!</span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary pt-1 mt-3" [disabled]="!form.form.valid">
+            Submit</button>
+        <p class="small fw-bold mt-2 pt-1 mt-2">
+            Already a member? 
+        <a class="link-danger fw-bold" [routerLink]="['/login']">Login here</a>
+        </p>
+    </form>
+    </div>
+</div>
+<!-- {{form.value |json}}  -->

@@ -1,0 +1,30 @@
+<div class="row container d-flex justify-content-center align-items-center">
+    <div class="col-lg-6 col-md-6 col-sm-12 p-2 mt-2 border shadow rounded">
+        <h3 class="p-2">Login</h3>
+        <form #loginForm="ngForm" (ngSubmit)="onFormSubmit(loginForm)" class="m-2">
+            <div class="form-group mt-2">
+                <label for="email">User Name</label>
+                <input type="email" name="userName" class="form-control" placeholder="Enter email you used while registering"
+                required [pattern]="emailPattern" #emailfield="ngModel" [(ngModel)]="user.userName">
+                <div class="text-danger" *ngIf="emailfield.errors && (emailfield.dirty || emailfield.touched)">
+                    <span [hidden]="!emailfield.errors.required">Email is required.</span>
+                    <span [hidden]="!emailfield.errors.pattern">Email not in valid format</span>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Password" required
+                [pattern]="pwdPattern" #passwordfield="ngModel" [(ngModel)]="user.password">
+                <div class="text-danger" *ngIf="passwordfield.errors && (passwordfield.dirty || passwordfield.touched)">
+                    <span [hidden]="!passwordfield.errors.required">Password is required.</span>
+                    <span [hidden]="!passwordfield.errors.pattern">Password not valid, should atleast have 8 characters)</span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary pt-1 mt-3" [disabled]="!loginForm.form.valid">Login</button>
+            <p class="small fw-bold mt-2 pt-1 mt-2">
+                Don't have an account? <a class="link-danger" [routerLink]="['/join']">Register</a>
+            </p>
+        </form>
+    </div>
+</div>

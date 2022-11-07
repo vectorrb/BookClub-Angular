@@ -1,0 +1,19 @@
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Book Name</th>
+        <th scope="col">Book Author</th>
+        <th scope="col">Likes</th>
+        <th scope="col">Genre</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of bookList">
+        <td>{{book.bookName}}</td>
+        <td>{{book.bookAuthor}}</td>
+        <td>{{book.likes}}</td>
+        <td>{{book.genre}}</td>
+        <td><a (click)="deleteProduct(userId, book.bookId)" class="btn btn-info">Click here</a></td>
+      </tr>
+    </tbody>
+  </table>

@@ -1,0 +1,54 @@
+<div class="row">
+	<div class="col-8">
+		<h1>All Users</h1>
+	</div>
+    <div class="col-2">
+		<a [routerLink]="['/allbooks']"
+		   class="btn btn-info">All Books</a>
+	</div>
+</div>
+
+<table class="table table-hover table-bordered row-striped">
+    <thead>
+      <tr>
+        <th scope="col" style="text-align: right;">-</th>
+        <th scope="col">Name</th>
+        <th scope="col">User Name</th>
+        <th scope="col" class="text-center">Gender</th>
+        <th scope="col">Date of Birth</th>
+        <th scope="col">Hobbies</th>
+        <!-- <th scope="col">Liked Books</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of userList; let indexOfElement = index">
+        <td style="text-align: right;">{{count + indexOfElement}}</td>
+        <td>{{user.firstName}}</td>
+        <td>{{user.userName}}</td>
+        <td *ngIf="!user.gender"  class="text-center">Male</td>
+        <td *ngIf="user.gender"  class="text-center">Female</td>
+        <td>{{user.dateOfBirth | date}}</td>
+        <td>{{user.hobbies}}</td>
+        <!-- <td><a [routerLink]="['/like',user.userId]" class="btn btn-info">Click here</a></td> -->
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <a [routerLink]="['/books']">Back to List</a>
+</div>
+
+<div class="row container d-flex justify-content-center align-items-center">
+  <div class="col-lg-6 col-md-6 col-sm-12 p-2 mt-2 border shadow rounded">
+      <h3 class="p-2">Date Sample</h3>
+      <form  #myform="ngForm" class="m-2">
+          <div class="form-group mt-2">
+            <label for="bookName">DOB</label>
+            <input type="date" name="bookName" class="form-control" placeholder="Book name" required
+            #bookField="ngModel" [(ngModel)]="s" 
+             minlength="3" >
+        </div>  
+      </form>
+
+      
+  </div>
+</div>
